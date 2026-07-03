@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRAME &mdash; Le média gaming francophone</title>
+<meta name="description" content="FRAME decrypte l'industrie du jeu video : metiers, transmedia, projets independants, interviews de professionnels. Retrouve-nous partout.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0D0D0D;
+    --black-soft:#151517;
+    --black-card:#1A1A1D;
+    --off-white:#F5F5F2;
+    --off-white-dim:#B8B8B5;
+    --frame-blue:#4A6CF7;
+    --frame-blue-dim:#2E3A7A;
+    --soft-purple:#A78BFA;
+    --line:rgba(245,245,242,0.10);
+    --line-strong:rgba(245,245,242,0.18);
+    --radius-s:8px;
+    --radius-m:14px;
+    --radius-l:22px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--black);
+    color:var(--off-white);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% -10%, rgba(74,108,247,0.16), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 100%, rgba(167,139,250,0.10), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:560px;
+    margin:0 auto;
+    padding:28px 20px 60px;
+  }
+
+  /* ---------- Header bandeau "chaine d'info" ---------- */
+  .infobar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px 14px;
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    background:rgba(245,245,242,0.03);
+    margin-bottom:28px;
+  }
+  .infobar-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    color:var(--off-white);
+  }
+  .live-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#FF4D4D;
+    box-shadow:0 0 0 0 rgba(255,77,77,.6);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,77,77,.55);}
+    70%{box-shadow:0 0 0 6px rgba(255,77,77,0);}
+    100%{box-shadow:0 0 0 0 rgba(255,77,77,0);}
+  }
+  .infobar-right{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--off-white-dim);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- Identite ---------- */
+  .identity{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    margin-bottom:30px;
+  }
+  .logo-mark{
+    width:64px;height:64px;
+    border-radius:18px;
+    background:linear-gradient(155deg, var(--frame-blue), #3753c9);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+    position:relative;
+    box-shadow:0 8px 30px -8px rgba(74,108,247,0.55);
+  }
+  .logo-mark::before{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:2px solid rgba(245,245,242,0.9);
+    border-radius:9px;
+  }
+  .wordmark{
+    font-family:'Inter Tight',sans-serif;
+    font-weight:800;
+    font-size:30px;
+    letter-spacing:0.01em;
+    margin:0 0 6px;
+    display:flex;
+    align-items:baseline;
+    gap:2px;
+  }
+  .wordmark .dot{
+    color:var(--frame-blue);
+    font-size:30px;
+    line-height:1;
+  }
+  .tagline{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    color:var(--frame-blue);
+    text-transform:uppercase;
+    margin:0 0 14px;
+  }
+  .pitch{
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--off-white-dim);
+    max-width:400px;
+    margin:0;
+  }
+
+  /* ---------- Section label ---------- */
+  .section-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--off-white-dim);
+    margin:34px 0 12px 4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .section-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- Liens generiques ---------- */
+  .link-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:15px 16px;
+    margin-bottom:10px;
+    border-radius:var(--radius-m);
+    border:1px solid var(--line-strong);
+    background:var(--black-card);
+    text-decoration:none;
+    color:var(--off-white);
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .link-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(74,108,247,0.55);
+    background:#1E1E22;
+  }
+  .link-card:active{transform:translateY(0);}
+  .link-icon{
+    width:38px;height:38px;
+    flex:0 0 38px;
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(245,245,242,0.06);
+  }
+  .link-icon svg{width:19px;height:19px;}
+  .link-text{flex:1;min-width:0;}
+  .link-title{
+    font-size:15px;
+    font-weight:600;
+    margin:0 0 2px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+  }
+  .link-sub{
+    font-size:12.5px;
+    color:var(--off-white-dim);
+    margin:0;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .link-arrow{
+    flex:0 0 auto;
+    opacity:0.45;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .link-card:hover .link-arrow{opacity:0.9; transform:translateX(2px);}
+
+  .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9.5px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:999px;
+    line-height:1.6;
+  }
+  .badge-blue{background:rgba(74,108,247,0.18); color:#8FA4FF;}
+  .badge-purple{background:rgba(167,139,250,0.18); color:var(--soft-purple);}
+  .badge-live{background:rgba(255,77,77,0.16); color:#FF7A7A;}
+
+  /* ---------- Carte vedette (a la une) ---------- */
+  .feature-card{
+    display:block;
+    border-radius:var(--radius-l);
+    border:1px solid var(--line-strong);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(74,108,247,0.22), transparent 55%),
+      var(--black-card);
+    padding:20px;
+    text-decoration:none;
+    color:var(--off-white);
+    margin-bottom:8px;
+    position:relative;
+    overflow:hidden;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .feature-card:hover{ border-color:rgba(74,108,247,0.6); transform:translateY(-2px); }
+  .feature-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .feature-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    color:var(--frame-blue);
+    text-transform:uppercase;
+  }
+  .feature-title{
+    font-size:17px;
+    font-weight:700;
+    margin:0 0 6px;
+    line-height:1.3;
+  }
+  .feature-desc{
+    font-size:13px;
+    color:var(--off-white-dim);
+    margin:0;
+    line-height:1.5;
+  }
+
+  /* ---------- Reseaux grid (icones rondes) ---------- */
+  .social-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .social-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    color:var(--off-white);
+    padding:14px 6px;
+    border-radius:var(--radius-m);
+    border:1px solid var(--line);
+    background:var(--black-card);
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .social-item:hover{
+    transform:translateY(-3px);
+    border-color:rgba(74,108,247,0.5);
+  }
+  .social-circle{
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--frame-blue);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .social-circle svg{width:21px;height:21px;fill:var(--off-white);}
+  .social-label{
+    font-size:11px;
+    font-weight:600;
+    color:var(--off-white-dim);
+    letter-spacing:0.01em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:40px;
+    text-align:center;
+  }
+  .foot-line{
+    height:1px;
+    background:var(--line);
+    margin-bottom:18px;
+  }
+  .foot-text{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    color:rgba(184,184,181,0.55);
+    letter-spacing:0.03em;
+    line-height:1.7;
+  }
+  .foot-text a{color:rgba(184,184,181,0.8); text-decoration:underline; text-decoration-color:rgba(184,184,181,0.3);}
+
+  @media (max-width:380px){
+    .social-grid{grid-template-columns:repeat(4,1fr); gap:8px;}
+    .wordmark{font-size:26px;}
+  }
+
+  :focus-visible{
+    outline:2px solid var(--frame-blue);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .live-dot{animation:none;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Bandeau chaine d'info -->
+  <div class="infobar">
+    <div class="infobar-left">
+      <span class="live-dot"></span>
+      FRAME · ACTU JV
+    </div>
+    <div class="infobar-right">EN LIGNE</div>
+  </div>
+
+  <!-- Identite -->
+  <div class="identity">
+    <div class="logo-mark" aria-hidden="true"></div>
+    <h1 class="wordmark">FRAME<span class="dot">.</span></h1>
+    <p class="tagline">Gaming. Métiers. Culture.</p>
+    <p class="pitch">Le média gaming francophone qui décrypte l'industrie : métiers, transmédia, projets indépendants et interviews de professionnels. Sans drama, sans clickbait.</p>
+  </div>
+
+  <!-- A la une -->
+  <div class="section-label">À la une</div>
+  <a href="https://www.youtube.com/@FRAME" class="feature-card" target="_blank" rel="noopener">
+    <div class="feature-top">
+      <span class="feature-label">Dernière vidéo</span>
+      <span class="badge badge-blue">Nouveau</span>
+    </div>
+    <p class="feature-title">▶ Regarder sur YouTube</p>
+    <p class="feature-desc">Actu, décryptages et portraits de métiers &mdash; un nouveau format chaque jour.</p>
+  </a>
+
+  <!-- Suivre -->
+  <div class="section-label">Suivre FRAME</div>
+
+  <a href="https://www.tiktok.com/@frame.media" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M16.6 5.82c-.84-.79-1.34-1.91-1.34-3.13h-3.18v13.31c0 1.56-1.27 2.83-2.84 2.83a2.83 2.83 0 1 1 0-5.66c.27 0 .53.04.78.11V9.97a6.02 6.02 0 0 0-.78-.05A6.02 6.02 0 0 0 3.4 16a6.02 6.02 0 0 0 9.99 4.51A6.02 6.02 0 0 0 15.4 16V9.34a8.27 8.27 0 0 0 4.6 1.4V7.55a4.85 4.85 0 0 1-3.4-1.73z" fill="#F5F5F2"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">TikTok</span>
+      <span class="link-sub">Actu flash, métiers, formats courts</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <a href="https://www.instagram.com/frame.media" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#F5F5F2" stroke-width="1.8"/><circle cx="12" cy="12" r="3.8" stroke="#F5F5F2" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="#F5F5F2"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Instagram</span>
+      <span class="link-sub">Reels, stories et carrousels FRAME</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <a href="https://www.youtube.com/@FRAME" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="4" stroke="#F5F5F2" stroke-width="1.8"/><path d="M10.5 9.2v5.6l4.7-2.8-4.7-2.8z" fill="#F5F5F2"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">YouTube</span>
+      <span class="link-sub">Décryptages, interviews, dossiers</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <a href="https://www.twitch.tv/frame_media" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 3h15v11l-4 4h-4l-3 3H6v-3H3V7l2-4z" stroke="#F5F5F2" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 8v4M16 8v4" stroke="#F5F5F2" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Twitch <span class="badge badge-live">Live</span></span>
+      <span class="link-sub">Lives interviews et avant-premières</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <a href="https://twitter.com/frame_media" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 4l16 16M20 4L4 20" stroke="none"/><path d="M3.5 3.5l8.2 10.7L3.9 20.5h2l6.8-7.2 5.6 7.2h3.9L13.3 9.4l7.3-5.9h-2L12.4 9.9 7.4 3.5H3.5z" fill="#F5F5F2"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">X / Twitter</span>
+      <span class="link-sub">Veille actu et analyses courtes</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <!-- Communaute -->
+  <div class="section-label">Rejoindre la communauté</div>
+
+  <a href="https://discord.gg/PLACEHOLDER" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(167,139,250,0.16);">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M19 6.5c-1.2-.6-2.5-1-3.8-1.2l-.3.6c1.1.3 2.1.7 3 1.3-2.5-1.2-5.3-1.2-7.8 0 .9-.6 1.9-1 3-1.3l-.3-.6C11.5 5.5 10.2 5.9 9 6.5 6.9 9.5 6.3 12.6 6.6 15.6c1 .7 2.1 1.3 3.3 1.7l.5-.9c-.7-.2-1.4-.6-2-1 1.3.6 2.7.9 4.1.9s2.8-.3 4.1-.9c-.6.4-1.3.8-2 1l.5.9c1.2-.4 2.3-1 3.3-1.7.3-3-.3-6.1-2.4-9.1zM10.3 13.6c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5zm4.4 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5z" fill="#A78BFA"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Discord</span>
+      <span class="link-sub">Le QG de la communauté FRAME</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <a href="https://frame-media.substack.com/PLACEHOLDER" class="link-card" target="_blank" rel="noopener">
+    <span class="link-icon" style="background:rgba(167,139,250,0.16);">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#A78BFA" stroke-width="1.7"/><path d="M4 7l8 6 8-6" stroke="#A78BFA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Newsletter</span>
+      <span class="link-sub">L'essentiel de la semaine, chaque mercredi</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <!-- Soutenir -->
+  <div class="section-label">Soutenir le projet</div>
+
+  <a href="https://www.patreon.com/frame_media" class="link-card" target="_blank" rel="noopener" style="border-color:rgba(74,108,247,0.45); background:linear-gradient(135deg, rgba(74,108,247,0.14), rgba(167,139,250,0.08));">
+    <span class="link-icon" style="background:rgba(74,108,247,0.22);">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="9.5" cy="10" r="5.5" fill="#8FA4FF"/><rect x="16.5" y="4" width="2.5" height="16" fill="#4A6CF7"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Patreon <span class="badge badge-blue">Soutien</span></span>
+      <span class="link-sub">Aide FRAME à grandir et à embaucher</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <!-- Contact -->
+  <div class="section-label">Pour aller plus loin</div>
+
+  <a href="mailto:projets@frame.media" class="link-card">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#F5F5F2" stroke-width="1.7"/><path d="M4 7l8 6 8-6" stroke="#F5F5F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Présenter ton projet</span>
+      <span class="link-sub">projets@frame.media &mdash; indés &amp; studios</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <a href="https://frame-media.com" class="link-card">
+    <span class="link-icon" style="background:rgba(245,245,242,0.08);">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#F5F5F2" stroke-width="1.7"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" stroke="#F5F5F2" stroke-width="1.4"/></svg>
+    </span>
+    <span class="link-text">
+      <span class="link-title">Site officiel</span>
+      <span class="link-sub">Le projet FRAME en détail</span>
+    </span>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#F5F5F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+
+  <!-- Mini grille reseaux (rappel visuel rapide) -->
+  <div class="section-label">Tous les comptes</div>
+  <div class="social-grid">
+    <a href="https://www.tiktok.com/@frame.media" class="social-item" target="_blank" rel="noopener">
+      <span class="social-circle"><svg viewBox="0 0 24 24"><path d="M16.6 5.82c-.84-.79-1.34-1.91-1.34-3.13h-3.18v13.31c0 1.56-1.27 2.83-2.84 2.83a2.83 2.83 0 1 1 0-5.66c.27 0 .53.04.78.11V9.97a6.02 6.02 0 0 0-.78-.05A6.02 6.02 0 0 0 3.4 16a6.02 6.02 0 0 0 9.99 4.51A6.02 6.02 0 0 0 15.4 16V9.34a8.27 8.27 0 0 0 4.6 1.4V7.55a4.85 4.85 0 0 1-3.4-1.73z"/></svg></span>
+      <span class="social-label">TikTok</span>
+    </a>
+    <a href="https://www.instagram.com/frame.media" class="social-item" target="_blank" rel="noopener">
+      <span class="social-circle"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#F5F5F2" stroke-width="1.8"/><circle cx="12" cy="12" r="3.8" stroke="#F5F5F2" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="#F5F5F2"/></svg></span>
+      <span class="social-label">Instagram</span>
+    </a>
+    <a href="https://www.youtube.com/@FRAME" class="social-item" target="_blank" rel="noopener">
+      <span class="social-circle"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="4" stroke="#F5F5F2" stroke-width="1.8"/><path d="M10.5 9.2v5.6l4.7-2.8-4.7-2.8z" fill="#F5F5F2"/></svg></span>
+      <span class="social-label">YouTube</span>
+    </a>
+    <a href="https://www.snapchat.com/add/PLACEHOLDER" class="social-item" target="_blank" rel="noopener">
+      <span class="social-circle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3c2.6 0 4.5 2 4.5 4.7 0 1.2-.1 2.1.2 2.8.3.6 1 .9 1.8 1-.1.7-.9 1.2-1.6 1.5.2.5.6.9.6 1.3 0 .3-.5.5-1.1.6-.4.1-.5.4-.6.7-.2.6-.6.8-1.3.8-.6 0-1-.2-1.7-.2-.7 0-1.3.6-2.8.6s-2.1-.6-2.8-.6c-.7 0-1.1.2-1.7.2-.7 0-1.1-.2-1.3-.8-.1-.3-.2-.6-.6-.7-.6-.1-1.1-.3-1.1-.6 0-.4.4-.8.6-1.3-.7-.3-1.5-.8-1.6-1.5.8-.1 1.5-.4 1.8-1 .3-.7.2-1.6.2-2.8C7.5 5 9.4 3 12 3z" stroke="#F5F5F2" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+      <span class="social-label">Snapchat</span>
+    </a>
+  </div>
+
+  <footer>
+    <div class="foot-line"></div>
+    <p class="foot-text">
+      FRAME · MÉDIA GAMING INDÉPENDANT<br>
+      <a href="mailto:projets@frame.media">projets@frame.media</a>
+    </p>
+  </footer>
+
+</div>
+
+</body>
+</html>
